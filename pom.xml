@@ -55,7 +55,7 @@
           <configuration>
             <archiveClasses>true</archiveClasses>
             <webXml>src\main\webapp\WEB-INF\web.xml</webXml>
-            <outputDirectory>C:\Git\UTBM\TeachMe\out\artifacts\TeachMe\</outputDirectory>
+            <outputDirectory>out\artifacts\TeachMe\</outputDirectory>
           </configuration>
 
         </plugin>

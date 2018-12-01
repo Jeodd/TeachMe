@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="TeachMeSrc">
-    <output-path>$PROJECT_DIR$/webapp/WEB-INF/lib</output-path>
-    <root id="archive" name="TeachMeSrc.jar">
-      <element id="module-output" name="TeachMe" />
-    </root>
-  </artifact>
-</component>

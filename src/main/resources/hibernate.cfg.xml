@@ -12,7 +12,7 @@
         <property name="hibernate.connection.useSSL">false</property>
         <property name="connection.pool_size">1</property>
         <property name="current_session_context_class">thread</property>
-        <property name="hbm2ddl.auto">validate</property>
+        <!--<property name="hbm2ddl.auto">validate</property>-->
         <mapping class="fr.utbm.TeachMe.entity.Client"/>
         <mapping class="fr.utbm.TeachMe.entity.Course"/>
         <mapping class="fr.utbm.TeachMe.entity.Location"/>

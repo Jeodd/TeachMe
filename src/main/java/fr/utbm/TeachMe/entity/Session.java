@@ -100,4 +100,16 @@ public class Session {
         result = 31 * result + (courseCode != null ? courseCode.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "Session{" +
+                "id=" + id +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", max=" + max +
+                ", locationId=" + locationId +
+                ", courseCode='" + courseCode + '\'' +
+                '}';
+    }
 }

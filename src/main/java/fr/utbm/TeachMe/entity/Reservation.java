@@ -50,4 +50,12 @@ public class Reservation {
         result = 31 * result + clientId;
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "Reservation{" +
+                "sessionId=" + sessionId +
+                ", clientId=" + clientId +
+                '}';
+    }
 }

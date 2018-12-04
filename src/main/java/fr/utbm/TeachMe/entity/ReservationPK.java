@@ -47,4 +47,12 @@ public class ReservationPK implements Serializable {
         result = 31 * result + clientId;
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "ReservationPK{" +
+                "sessionId=" + sessionId +
+                ", clientId=" + clientId +
+                '}';
+    }
 }

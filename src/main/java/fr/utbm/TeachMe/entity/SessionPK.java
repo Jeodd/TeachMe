@@ -60,4 +60,13 @@ public class SessionPK implements Serializable {
         result = 31 * result + (courseCode != null ? courseCode.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "SessionPK{" +
+                "id=" + id +
+                ", locationId=" + locationId +
+                ", courseCode='" + courseCode + '\'' +
+                '}';
+    }
 }

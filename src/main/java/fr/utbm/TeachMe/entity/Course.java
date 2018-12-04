@@ -11,7 +11,7 @@ public class Course {
     private String title;
 
     @Id
-    @Column(name = "CODE", nullable = false, length = 4)
+    @Column(name = "CODE")
     public String getCode() {
         return code;
     }
@@ -21,7 +21,7 @@ public class Course {
     }
 
     @Basic
-    @Column(name = "TITLE", nullable = false, length = 45)
+    @Column(name = "TITLE")
     public String getTitle() {
         return title;
     }
@@ -48,13 +48,5 @@ public class Course {
         int result = code != null ? code.hashCode() : 0;
         result = 31 * result + (title != null ? title.hashCode() : 0);
         return result;
-    }
-
-    @Override
-    public String toString() {
-        return "Course{" +
-                "code='" + code + '\'' +
-                ", title='" + title + '\'' +
-                '}';
     }
 }

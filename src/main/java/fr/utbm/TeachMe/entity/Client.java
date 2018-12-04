@@ -1,9 +1,11 @@
 package fr.utbm.TeachMe.entity;
 
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Entity
-@Table(name = "Client")
 public class Client {
     private int id;
     private String lastname;
@@ -13,8 +15,7 @@ public class Client {
     private String email;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID", nullable = false)
+    @Column(name = "ID")
     public int getId() {
         return id;
     }
@@ -24,7 +25,7 @@ public class Client {
     }
 
     @Basic
-    @Column(name = "LASTNAME", nullable = false, length = 45)
+    @Column(name = "Lastname")
     public String getLastname() {
         return lastname;
     }
@@ -34,7 +35,7 @@ public class Client {
     }
 
     @Basic
-    @Column(name = "FIRSTNAME", nullable = false, length = 45)
+    @Column(name = "Firstname")
     public String getFirstname() {
         return firstname;
     }
@@ -44,7 +45,7 @@ public class Client {
     }
 
     @Basic
-    @Column(name = "ADDRESS", nullable = false, length = 45)
+    @Column(name = "Address")
     public String getAddress() {
         return address;
     }
@@ -54,7 +55,7 @@ public class Client {
     }
 
     @Basic
-    @Column(name = "PHONE", nullable = false, length = 45)
+    @Column(name = "Phone")
     public String getPhone() {
         return phone;
     }
@@ -64,7 +65,7 @@ public class Client {
     }
 
     @Basic
-    @Column(name = "EMAIL", nullable = true, length = 45)
+    @Column(name = "Email")
     public String getEmail() {
         return email;
     }
@@ -99,17 +100,5 @@ public class Client {
         result = 31 * result + (phone != null ? phone.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
         return result;
-    }
-
-    @Override
-    public String toString() {
-        return "Client{" +
-                "id=" + id +
-                ", lastname='" + lastname + '\'' +
-                ", firstname='" + firstname + '\'' +
-                ", address='" + address + '\'' +
-                ", phone='" + phone + '\'' +
-                ", email='" + email + '\'' +
-                '}';
     }
 }

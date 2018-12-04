@@ -1,25 +1,27 @@
 package fr.utbm.TeachMe.entity;
 
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Entity
 public class Location {
-    private int id;
+    private int idLocation;
     private String city;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID", nullable = false)
-    public int getId() {
-        return id;
+    @Column(name = "idLocation")
+    public int getIdLocation() {
+        return idLocation;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdLocation(int idLocation) {
+        this.idLocation = idLocation;
     }
 
     @Basic
-    @Column(name = "CITY", nullable = false, length = 45)
+    @Column(name = "City")
     public String getCity() {
         return city;
     }
@@ -35,7 +37,7 @@ public class Location {
 
         Location location = (Location) o;
 
-        if (id != location.id) return false;
+        if (idLocation != location.idLocation) return false;
         if (city != null ? !city.equals(location.city) : location.city != null) return false;
 
         return true;
@@ -43,16 +45,8 @@ public class Location {
 
     @Override
     public int hashCode() {
-        int result = id;
+        int result = idLocation;
         result = 31 * result + (city != null ? city.hashCode() : 0);
         return result;
-    }
-
-    @Override
-    public String toString() {
-        return "Location{" +
-                "id=" + id +
-                ", city='" + city + '\'' +
-                '}';
     }
 }

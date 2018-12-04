@@ -16,8 +16,7 @@
         <mapping class="fr.utbm.TeachMe.entity.Client"/>
         <mapping class="fr.utbm.TeachMe.entity.Course"/>
         <mapping class="fr.utbm.TeachMe.entity.Location"/>
-        <mapping class="fr.utbm.TeachMe.entity.Reservation"/>
-        <mapping class="fr.utbm.TeachMe.entity.Session"/>
+        <mapping class="fr.utbm.TeachMe.entity.CourseSession"/>
         <!-- DB schema will be updated if needed -->
         <!-- <property name="hbm2ddl.auto">update</property> -->
     </session-factory>

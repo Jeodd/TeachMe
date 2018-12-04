@@ -1,6 +1,7 @@
 package fr.utbm.TeachMe.services;
 
 import java.io.Serializable;
+import fr.utbm.TeachMe.repository.ClientDao;
 
 public class ClientService implements Serializable {
 
@@ -11,5 +12,5 @@ public class ClientService implements Serializable {
     // GETTERS
 
     // SETTERS
-
+    // FUNCTIONS AND METHODS
 }

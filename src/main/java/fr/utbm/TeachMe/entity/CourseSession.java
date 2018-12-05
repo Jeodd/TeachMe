@@ -12,6 +12,7 @@ public class CourseSession {
     private Integer max;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     public int getId() {
         return id;

@@ -1,19 +1,20 @@
 package fr.utbm.TeachMe.repository;
 
-import fr.utbm.TeachMe.entity.Course;
 import fr.utbm.TeachMe.utils.HibernateUtils;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
+import fr.utbm.TeachMe.entity.CourseSession;
 import javax.persistence.criteria.CriteriaQuery;
 
 import java.util.List;
 
-public class CourseDao {
+public class CourseSessionDao {
 
-    public void saveCourse(Course c){
+    public void saveCourseSession(CourseSession cs){
         Session mySession = HibernateUtils.openSession();
         try{
             mySession.beginTransaction();
-            mySession.save(c);
+            mySession.save(cs);
             mySession.getTransaction().commit();
         }catch (Exception e){
             //TODO : Log4J implementation
@@ -23,11 +24,11 @@ public class CourseDao {
         }
     }
 
-    private void deleteCourse (Course c ){
+    private void deleteCourseSession (CourseSession cs ){
         Session mySession = HibernateUtils.openSession();
         try{
             mySession.beginTransaction();
-            mySession.delete(c);
+            mySession.delete(cs);
             mySession.getTransaction().commit();
         }catch (Exception e){
             //TODO : Log4J implementation
@@ -37,11 +38,11 @@ public class CourseDao {
         }
     }
 
-    private void updateCourse (Course c ){
+    private void updateCourseSession (CourseSession cs ){
         Session mySession = HibernateUtils.openSession();
         try{
             mySession.beginTransaction();
-            mySession.update(c);
+            mySession.update(cs);
             mySession.getTransaction().commit();
         }catch (Exception e){
             //TODO : Log4J implementation
@@ -51,28 +52,28 @@ public class CourseDao {
         }
     }
 
-    public List<Course> getAllCourse (){
-        List<Course> allCourses = null;
+    public List<CourseSession> getAllCourseSession (){
+        List<CourseSession> allCourseSession = null;
         Session mySession = HibernateUtils.openSession();
         try{
-            CriteriaQuery<Course> critQuery = mySession.getCriteriaBuilder().createQuery(Course.class);
-            critQuery.from(Course.class);
-            allCourses = mySession.createQuery(critQuery).getResultList();
+            CriteriaQuery<CourseSession> critQuery = mySession.getCriteriaBuilder().createQuery(CourseSession.class);
+            critQuery.from(CourseSession.class);
+            allCourseSession = mySession.createQuery(critQuery).getResultList();
         }catch (Exception e){
             //TODO : Log4J implementation
             //le type d'exception doit etre adapté
         } finally {
             mySession.close();
         }
-        return allCourses;
+        return allCourseSession;
     }
 
-    public Course getCourse(Course c){
-        Course selectedCourse = null;
+    public CourseSession getCourseSession(CourseSession cs){
+        CourseSession selectedCourseSession = null;
         Session mySession = HibernateUtils.openSession();
         try {
             mySession.beginTransaction();
-            selectedCourse =  mySession.get(Course.class, c.getCode());
+            selectedCourseSession =  mySession.get(CourseSession.class, cs.getId());
             mySession.getTransaction().commit();
         }catch (Exception e){
             //TODO : Log4J implementation
@@ -80,6 +81,6 @@ public class CourseDao {
         }finally {
             mySession.close();
         }
-        return selectedCourse;
+        return selectedCourseSession;
     }
 }

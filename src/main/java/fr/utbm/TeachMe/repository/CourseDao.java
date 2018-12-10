@@ -28,7 +28,7 @@ public class CourseDao {
         }
     }
 
-    private void deleteCourse (Course c ){
+    public void deleteCourse (Course c ){
         Session mySession = HibernateUtils.openSession();
         try{
             mySession.beginTransaction();
@@ -43,7 +43,7 @@ public class CourseDao {
         }
     }
 
-    private void updateCourse (Course c ){
+    public void updateCourse (Course c ){
         Session mySession = HibernateUtils.openSession();
         try{
             mySession.beginTransaction();

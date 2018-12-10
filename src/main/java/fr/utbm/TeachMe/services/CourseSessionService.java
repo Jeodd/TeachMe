@@ -3,14 +3,32 @@ package fr.utbm.TeachMe.services;
 import fr.utbm.TeachMe.entity.CourseSession;
 import fr.utbm.TeachMe.repository.CourseSessionDao;
 
+import java.util.List;
+
 public class CourseSessionService {
+    CourseSessionDao csdao = new CourseSessionDao();
 
     public CourseSessionService(){
 
     }
 
+    public void saveCoursesSession(CourseSession cs) {
+        csdao.saveCourseSession(cs);
+    }
+
+    public void updateCoursesSession(CourseSession cs) {
+        csdao.updateCourseSession(cs);
+    }
+
+    public void deleteCoursesSession(CourseSession cs) {
+        csdao.deleteCourseSession(cs);
+    }
+
+    public List<CourseSession> getAllCoursesSession() {
+        return csdao.getAllCourseSession();
+    }
+
     public CourseSession getCoursesSession(CourseSession cs){
-        CourseSessionDao csdao = new CourseSessionDao();
         return csdao.getCourseSession(cs);
     }
 }

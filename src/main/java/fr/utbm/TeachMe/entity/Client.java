@@ -10,6 +10,7 @@ public class Client {
     private String address;
     private String phone;
     private String email;
+    private CourseSession cs;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -72,6 +73,12 @@ public class Client {
         this.email = email;
     }
 
+    @OneToOne
+    @JoinColumn(name = "Course_Session_ID")
+    public CourseSession getCourseSession() {return cs;}
+    public void setCourseSession(CourseSession _cs) {this.cs = _cs;}
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -90,6 +97,19 @@ public class Client {
     }
 
     @Override
+    public String toString() {
+        return "Client{" +
+                "id=" + id +
+                ", lastname='" + lastname + '\'' +
+                ", firstname='" + firstname + '\'' +
+                ", address='" + address + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", cs=" + cs +
+                '}';
+    }
+
+    @Override
     public int hashCode() {
         int result = id;
         result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
@@ -98,5 +118,17 @@ public class Client {
         result = 31 * result + (phone != null ? phone.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
         return result;
+    }
+
+    public Client() {
+    }
+
+    public Client(String lastname, String firstname, String address, String phone, String email, CourseSession cs) {
+        this.lastname = lastname;
+        this.firstname = firstname;
+        this.address = address;
+        this.phone = phone;
+        this.email = email;
+        this.cs = cs;
     }
 }

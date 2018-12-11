@@ -1,0 +1,12 @@
+#openStreetMap { 
+    height: 600px; 
+}
+
+#course_name {
+    margin-bottom: 1em;
+}
+
+#myProgressSeats {
+    padding-top: 1.3em;
+    padding-bottom: 1em;
+}

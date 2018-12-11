@@ -49,4 +49,8 @@ public class Location {
         result = 31 * result + (city != null ? city.hashCode() : 0);
         return result;
     }
+
+    public String toString() {
+        return "Id : " + this.idLocation + ", City : " + this.city;
+    }
 }

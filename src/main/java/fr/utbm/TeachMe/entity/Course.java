@@ -49,4 +49,9 @@ public class Course {
         result = 31 * result + (title != null ? title.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "Code : " + this.code + ", Title : " + this.title;
+    }
 }

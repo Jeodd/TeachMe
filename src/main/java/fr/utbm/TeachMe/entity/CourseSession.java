@@ -75,4 +75,9 @@ public class CourseSession {
         result = 31 * result + (max != null ? max.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "Id : " + this.id + ", start date : " + this.startDate + ", end date : " + this.endDate;
+    }
 }

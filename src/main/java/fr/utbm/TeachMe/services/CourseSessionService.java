@@ -25,10 +25,17 @@ public class CourseSessionService {
     }
 
     public List<CourseSession> getAllCoursesSession() {
+
         return csdao.getAllCourseSession();
     }
 
     public CourseSession getCoursesSession(CourseSession cs){
+        return csdao.getCourseSession(cs);
+    }
+    public CourseSession getCoursesSessionById(String id){
+        int _id = Integer.parseInt(id);
+        CourseSession cs = new CourseSession();
+        cs.setId(_id);
         return csdao.getCourseSession(cs);
     }
 }

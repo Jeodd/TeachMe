@@ -1,6 +1,8 @@
 package fr.utbm.TeachMe.repository;
 
 import fr.utbm.TeachMe.entity.Course;
+import fr.utbm.TeachMe.entity.CourseSession;
+import fr.utbm.TeachMe.entity.Location;
 import fr.utbm.TeachMe.utils.HibernateUtils;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -91,4 +93,52 @@ public class CourseDao {
         }
         return selectedCourse;
     }
-}
+    public List<Course> getAllCoursesByKeyWord(String keyWord) {
+        Session mySession = HibernateUtils.openSession();
+        List<Course> coursesByKeyWord = null;
+        try{
+            coursesByKeyWord= mySession.createQuery(
+                    "select CO.title " +
+                            "from Course CO " +
+                            "where title like '%" + keyWord + "%'"
+            ).getResultList();
+        }catch(Exception e){
+            logger.fatal("Error during coursesByKeyWord recovery", e);
+        }
+        return coursesByKeyWord;
+
+    }
+
+    public List<Course> getAllCoursesByCourseSessionDate(CourseSession cs) {
+        Session mySession = HibernateUtils.openSession();
+        List<Course> coursesByDates = null;
+        try{
+            coursesByDates = mySession.createQuery(
+                    "select CO.title " +
+                            "from Course CO " +
+                            "inner join CourseSession CS on CS.course.code = CO.code " +
+                            "where CS.startDate = '" + cs.getStartDate().toString() + "'")
+                    .getResultList();
+        }catch(Exception e){
+            logger.fatal("Error during coursesByDates recovery", e);
+        }
+        return coursesByDates;
+    }
+
+    public List<Course> getAllCoursesByLocation(Location loc) {
+        Session mySession = HibernateUtils.openSession();
+        List<Course> courseByLocation = null;
+        try{
+            courseByLocation = mySession.createQuery(
+                    "select CO.title " +
+                            "from Course CO " +
+                            "inner join CourseSession  CS on CS.course.code = CO.code " +
+                            "inner join Location LOC on LOC.idLocation = CS.location.idLocation " +
+                            "where LOC.city = '" + loc.getCity() + "'"
+            ).getResultList();
+        }catch(Exception e){
+            logger.fatal("Error during courseByLocation recovery", e);
+        }
+        return courseByLocation;
+        }
+    }

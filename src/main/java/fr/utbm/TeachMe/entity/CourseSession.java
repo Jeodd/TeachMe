@@ -100,6 +100,13 @@ public class CourseSession {
 
     @Override
     public String toString() {
-        return "Id : " + this.id + ", start date : " + this.startDate + ", end date : " + this.endDate;
+        return "CourseSession{" +
+                "id=" + id +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", max=" + max +
+                ", course=" + course +
+                ", location=" + location +
+                '}';
     }
 }

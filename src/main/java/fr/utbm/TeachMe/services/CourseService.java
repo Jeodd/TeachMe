@@ -1,6 +1,8 @@
 package fr.utbm.TeachMe.services;
 
 import fr.utbm.TeachMe.entity.Course;
+import fr.utbm.TeachMe.entity.CourseSession;
+import fr.utbm.TeachMe.entity.Location;
 import fr.utbm.TeachMe.repository.CourseDao;
 
 import java.util.List;
@@ -29,4 +31,17 @@ public class CourseService {
     public List<Course> getAllCourses() {
         return cdao.getAllCourses();
     }
+
+    public List<Course> getallCoursesByCourseSessionDate(CourseSession cs) {
+        return cdao.getAllCoursesByCourseSessionDate(cs);
+    }
+
+    public List<Course> getAllCoursesByLocation(Location loc) {
+        return cdao.getAllCoursesByLocation(loc);
+    }
+
+    public List<Course> getAllCoursesByKeyWord(String keyWord) {
+        return cdao.getAllCoursesByKeyWord(keyWord);
+    }
 }
+

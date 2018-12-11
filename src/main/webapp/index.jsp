@@ -28,57 +28,87 @@
 
         <div class="container-fluid">
 
-            <h2>Hello World!</h2>
-            <%@page import="fr.utbm.TeachMe.entity.Course"%>
-            <%@page import="fr.utbm.TeachMe.services.CourseService"%>
+            <h2>Formation Catalogue :</h2>
             <%@ page import="fr.utbm.TeachMe.services.CourseSessionService" %>
             <%@ page import="fr.utbm.TeachMe.entity.CourseSession" %>
             <%@ page import="java.util.List" %>
             <%@ page import="java.util.ArrayList" %>
-            <%@ page import="fr.utbm.TeachMe.services.RequestsUtilsService" %>
             <%
-                CourseService cs = new CourseService();
-                RequestsUtilsService requestsUtilsService = new RequestsUtilsService();
-                Course c = new Course();
-                c.setCode("INF1");
-                c = cs.getCourse(c);
-
                 CourseSessionService css = new CourseSessionService();
-                CourseSession courseSession = new CourseSession();
-                courseSession.setId(1);
-                courseSession = css.getCoursesSession(courseSession);
-
                 List<String> list = new ArrayList();
-                for(CourseSession item : css.getAllCoursesSession()) { list.add(item.toString()); }
+                CourseSession toto = new CourseSession();
+                for(CourseSession item : css.getAllCoursesSession()) {
+                    list.add(item.toString());
+                }
 
 
             %>
-            <b>Course :  <%= c.getTitle()%></b>
-            </br>
-            <b>Courses Session ID :  <%= courseSession.getId()%></b>
-            </br>
-            <b>Courses Session :  <%= courseSession.getStartDate()%></b>
-            </br>
-            <b>Courses by Date : <%= requestsUtilsService.getallCoursesByCourseSessionDate("2019-01-14") %></b>
-            </br>
-            <b>Courses by Location : <%= requestsUtilsService.getAllCoursesByLocation("Montbeliard") %></b>
-            </br>
-            <b>Courses by Key word : <%= requestsUtilsService.getAllCoursesByKeyWord("IN") %></b>
-            </br>
-            <select name="mySelect">
+            <table >
+                <thead>
+                    <tr>
+                        <td>Number</td>
+                        <td>Formation</td>
+                        <td>Location</td>
+                        <td>Start Date</td>
+                        <td>End Date</td>
+                        <td>Maximum</td>
+                        <td>Apply</td>
+                    </tr>
+                </thead>
+                <tbody>
                 <%
-                    for(int i = 0; i < list.size(); i++) {
+                    for(CourseSession item : css.getAllCoursesSession()) {
+                        %>
+                            <tr>
+                                <td><%=item.getId()%></td>
+                                <td><%=item.getCourse().getTitle()%></td>
+                                <td><%=item.getLocation().getCity()%></td>
+                                <td><%=item.getStartDate().toString()%></td>
+                                <td><%=item.getEndDate().toString()%></td>
+                                <td><%=item.getMax().toString()%></td>
+                                <td>
+                                    <form action = "applyServlet">
+                                        <input style="display: none" name="CourseSessionId" value="<%=item.getId()%>">
+                                        <input type="submit" value="Apply">
+                                    </form>
+                                </td>
+                            </tr>
+                        <%
+                    }
                 %>
-                <option value = "<%list.get(i);%>"><%=list.get(i)%>
-                </option>
-                <% } %>
-            </select>
+                </tbody>
+            </table>
+            <%--</br>--%>
+            <%--<b>Courses Session ID :  <%= courseSession.getId()%></b>--%>
+            <%--</br>--%>
+            <%--<b>Courses Session :  <%= courseSession.getStartDate()%></b>--%>
+            <%--</br>--%>
+            <%--<b>Courses by Date : <%= cs.getallCoursesByCourseSessionDate("2019-01-14") %></b>--%>
+            <%--</br>--%>
+            <%--<b>Courses by Location : <%= cs.getAllCoursesByLocation("Montbeliard") %></b>--%>
+            <%--</br>--%>
+            <%--<b>Courses by Key word : <%= cs.getAllCoursesByKeyWord("IN") %></b>--%>
+            <%--</br>--%>
+            <%--<select name="mySelect">--%>
+                <%--<%--%>
+                    <%--for(int i = 0; i < list.size(); i++) {--%>
+                <%--%>--%>
+                <%--<option value = "<%list.get(i);%>"><%=list.get(i)%>--%>
+                <%--</option>--%>
+                <%--<% } %>--%>
+            <%--</select>--%>
+            <%--<div>--%>
+                <%--<%--%>
+                <%--for(int i = 0; i < list.size(); i++) {--%>
+                <%--%>--%>
+                <%--<p><%=list.get(i)%>--%>
+                <%--</p>--%>
+                <%--<% } %>--%>
+            <%--</div>--%>
         </div>
     </div>
 
 </div>
-
-
 <div>
     <jsp:include page="fragments/footer.html" />
 </div>

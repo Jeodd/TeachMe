@@ -35,8 +35,10 @@
             <%@ page import="fr.utbm.TeachMe.entity.CourseSession" %>
             <%@ page import="java.util.List" %>
             <%@ page import="java.util.ArrayList" %>
+            <%@ page import="fr.utbm.TeachMe.services.RequestsUtilsService" %>
             <%
                 CourseService cs = new CourseService();
+                RequestsUtilsService requestsUtilsService = new RequestsUtilsService();
                 Course c = new Course();
                 c.setCode("INF1");
                 c = cs.getCourse(c);
@@ -49,6 +51,7 @@
                 List<String> list = new ArrayList();
                 for(CourseSession item : css.getAllCoursesSession()) { list.add(item.toString()); }
 
+
             %>
             <b>Course :  <%= c.getTitle()%></b>
             </br>
@@ -56,7 +59,12 @@
             </br>
             <b>Courses Session :  <%= courseSession.getStartDate()%></b>
             </br>
-
+            <b>Courses by Date : <%= requestsUtilsService.getallCoursesByCourseSessionDate("2019-01-14") %></b>
+            </br>
+            <b>Courses by Location : <%= requestsUtilsService.getAllCoursesByLocation("Montbeliard") %></b>
+            </br>
+            <b>Courses by Key word : <%= requestsUtilsService.getAllCoursesByKeyWord("IN") %></b>
+            </br>
             <select name="mySelect">
                 <%
                     for(int i = 0; i < list.size(); i++) {

@@ -10,6 +10,8 @@ public class CourseSession {
     private Date startDate;
     private Date endDate;
     private Integer max;
+    private Course course;
+    private Location location;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,6 +52,26 @@ public class CourseSession {
 
     public void setMax(Integer max) {
         this.max = max;
+    }
+
+    @OneToOne
+    @JoinColumn(name = "Course_CODE")
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
+    }
+
+    @OneToOne
+    @JoinColumn(name = "Location_idLocation")
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
     }
 
     @Override

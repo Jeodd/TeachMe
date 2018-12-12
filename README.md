@@ -5,7 +5,7 @@ TeachMe project for scholar purpose
 the user must be able to :
 * Filter the formation catalog using key word contained in the title of the formation.
 * ~~Filter the formation catalog by selecting the session availbale at a given date.~~
-* Filter the formation catalog by choosing the location of the session, which must be given using a Drop-down list
+* ~~Filter the formation catalog by choosing the location of the session, which must be given using a Drop-down list
 * ~~Attend to a session by giving his personal informations (first name, last name, address, phone, email)~~
 
 ## Configurations :

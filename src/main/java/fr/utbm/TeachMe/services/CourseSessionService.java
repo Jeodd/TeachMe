@@ -3,6 +3,7 @@ package fr.utbm.TeachMe.services;
 import fr.utbm.TeachMe.entity.CourseSession;
 import fr.utbm.TeachMe.repository.CourseSessionDao;
 
+import java.sql.Date;
 import java.util.List;
 
 public class CourseSessionService {
@@ -37,5 +38,8 @@ public class CourseSessionService {
         CourseSession cs = new CourseSession();
         cs.setId(_id);
         return csdao.getCourseSession(cs);
+    }
+    public List<CourseSession> getAllCoursesSessionByDate (Date d){
+        return csdao.getCourseSessionByDate(d);
     }
 }

@@ -5,8 +5,11 @@ import org.apache.log4j.Level;
 import org.hibernate.Session;
 import org.apache.log4j.Logger;
 import fr.utbm.TeachMe.entity.CourseSession;
+
+import org.hibernate.query.Query;
 import javax.persistence.criteria.CriteriaQuery;
 
+import java.sql.Date;
 import java.util.List;
 
 public class CourseSessionDao {
@@ -90,5 +93,26 @@ public class CourseSessionDao {
             logger.log(Level.INFO, "Session closed successfully");
         }
         return selectedCourseSession;
+    }
+
+    public List<CourseSession> getCourseSessionByDate (Date date){
+        List<CourseSession> returnedList = null;
+        Session mySession = HibernateUtils.openSession();
+        try{
+            mySession.beginTransaction();
+            String hqlStr ="FROM CourseSession cs WHERE cs.startDate >= :_date";
+            Query q = mySession.createQuery(hqlStr);
+            q.setDate("_date", date);
+            returnedList = q.getResultList();
+            mySession.getTransaction().commit();
+
+            logger.log(Level.INFO, "Getting all courses sessions : OK");
+        }catch (Exception e){
+            logger.fatal("Error during courses session recovery (all of them)", e);
+        } finally {
+            mySession.close();
+            logger.log(Level.INFO, "Session closed successfully");
+        }
+        return returnedList;
     }
 }

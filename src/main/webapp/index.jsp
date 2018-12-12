@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
 <jsp:include page="fragments/header.html" />
-
+<%--//.size sur la liste de retour de la requete--%>
 <body id="page-top">
 
 <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
@@ -32,17 +32,22 @@
             <%@ page import="fr.utbm.TeachMe.services.CourseSessionService" %>
             <%@ page import="fr.utbm.TeachMe.entity.CourseSession" %>
             <%@ page import="java.util.List" %>
-            <%@ page import="java.util.ArrayList" %>
             <%
+                List<CourseSession> listToDisplay = null;
                 CourseSessionService css = new CourseSessionService();
-                List<String> list = new ArrayList();
-                CourseSession toto = new CourseSession();
-                for(CourseSession item : css.getAllCoursesSession()) {
-                    list.add(item.toString());
+                if (request.getAttribute("data") != null){
+                    listToDisplay = (List<CourseSession>)request.getAttribute("data");
+                }else{
+                    listToDisplay = css.getAllCoursesSession();
                 }
 
 
+
             %>
+            <form action = "filterByDate">
+                <input type = date name="selectedDate">
+                <input type="submit" value="Search">
+            </form>
             <table >
                 <thead>
                     <tr>
@@ -57,7 +62,7 @@
                 </thead>
                 <tbody>
                 <%
-                    for(CourseSession item : css.getAllCoursesSession()) {
+                    for(CourseSession item : listToDisplay) {
                         %>
                             <tr>
                                 <td><%=item.getId()%></td>

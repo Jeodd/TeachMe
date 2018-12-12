@@ -30,9 +30,12 @@
 
             <h2>Formation Catalogue :</h2>
             <%@ page import="fr.utbm.TeachMe.services.CourseSessionService" %>
+            <%@ page import="fr.utbm.TeachMe.services.Location" %>
             <%@ page import="fr.utbm.TeachMe.entity.CourseSession" %>
+            <%@ page import="fr.utbm.TeachMe.entity.Location" %>
             <%@ page import="java.util.List" %>
             <%
+
                 List<CourseSession> listToDisplay = null;
                 CourseSessionService css = new CourseSessionService();
                 if (request.getAttribute("data") != null){
@@ -40,9 +43,6 @@
                 }else{
                     listToDisplay = css.getAllCoursesSession();
                 }
-
-
-
             %>
             <form action = "filterByDate">
                 <input type = date name="selectedDate">

@@ -42,4 +42,7 @@ public class CourseSessionService {
     public List<CourseSession> getAllCoursesSessionByDate (Date d){
         return csdao.getCourseSessionByDate(d);
     }
+    public List<CourseSession> getCourseSessionByLocation (String cityName){
+        return csdao.getCourseSessionByLocation(cityName);
+    }
 }

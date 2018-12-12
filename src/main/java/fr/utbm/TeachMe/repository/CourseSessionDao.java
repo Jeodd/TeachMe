@@ -115,4 +115,23 @@ public class CourseSessionDao {
         }
         return returnedList;
     }
+    public List<CourseSession> getCourseSessionByLocation (String cityName){
+        List<CourseSession> returnedList = null;
+        Session mySession = HibernateUtils.openSession();
+        try{
+            mySession.beginTransaction();
+            String hqlStr ="FROM CourseSession cs WHERE cs.location.city = :_cityName";
+            Query q = mySession.createQuery(hqlStr);
+            q.setString("_cityName", cityName);
+            returnedList = q.getResultList();
+            mySession.getTransaction().commit();
+            logger.log(Level.INFO, "Getting all courses sessions : OK");
+        }catch (Exception e){
+            logger.fatal("Error during courses session recovery (all of them)", e);
+        } finally {
+            mySession.close();
+            logger.log(Level.INFO, "Session closed successfully");
+        }
+        return returnedList;
+    }
 }

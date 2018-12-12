@@ -30,14 +30,18 @@
 
             <h2>Formation Catalogue :</h2>
             <%@ page import="fr.utbm.TeachMe.services.CourseSessionService" %>
-            <%@ page import="fr.utbm.TeachMe.services.Location" %>
+            <%@ page import="fr.utbm.TeachMe.services.LocationService" %>
             <%@ page import="fr.utbm.TeachMe.entity.CourseSession" %>
             <%@ page import="fr.utbm.TeachMe.entity.Location" %>
             <%@ page import="java.util.List" %>
             <%
-
                 List<CourseSession> listToDisplay = null;
+                List<Location> locationList = null;
+                LocationService ls = new LocationService();
                 CourseSessionService css = new CourseSessionService();
+
+                locationList = ls.getAllLocation();
+
                 if (request.getAttribute("data") != null){
                     listToDisplay = (List<CourseSession>)request.getAttribute("data");
                 }else{
@@ -46,9 +50,22 @@
             %>
             <form action = "filterByDate">
                 <input type = date name="selectedDate">
-                <input type="submit" value="Search">
+                <input type="submit" value="Search by date">
             </form>
-            <table >
+            <form action = "filterByLocation">
+            <select name="selectedLocation"
+            <%
+                for(int i = 0; i < locationList.size(); i++){
+                    %>
+                    </br><%-- //TODO : without a tag (like br or p or whatever) before  option tag a city is missing (first one)--%>
+                    <option name="selectedLocation" value = "<%=locationList.get(i).getCity()%>"><%=locationList.get(i).getCity()%></option>
+                    <%
+                }
+            %>
+            </select>
+            <input type="submit" value="Search by location">
+            </form>
+                <table >
                 <thead>
                     <tr>
                         <td>Number</td>
@@ -94,12 +111,12 @@
             <%--</br>--%>
             <%--<b>Courses by Key word : <%= cs.getAllCoursesByKeyWord("IN") %></b>--%>
             <%--</br>--%>
-            <%--<select name="mySelect">--%>
+            <%-->--%>
                 <%--<%--%>
                     <%--for(int i = 0; i < list.size(); i++) {--%>
                 <%--%>--%>
-                <%--<option value = "<%list.get(i);%>"><%=list.get(i)%>--%>
-                <%--</option>--%>
+                <%--
+                <%----%>
                 <%--<% } %>--%>
             <%--</select>--%>
             <%--<div>--%>

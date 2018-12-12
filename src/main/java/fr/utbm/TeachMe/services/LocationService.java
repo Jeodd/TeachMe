@@ -1,5 +1,13 @@
 package fr.utbm.TeachMe.services;
 
+import fr.utbm.TeachMe.entity.Location;
+import fr.utbm.TeachMe.repository.LocationDao;
+
+import java.util.List;
+
 public class LocationService {
-    private 
+    LocationDao ldao = new LocationDao();
+    public List<Location> getAllLocation(){
+        return ldao.getAllLocations();
+    }
 }

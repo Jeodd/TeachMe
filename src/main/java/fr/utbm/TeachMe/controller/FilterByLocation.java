@@ -2,6 +2,7 @@ package fr.utbm.TeachMe.controller;
 
 import fr.utbm.TeachMe.entity.CourseSession;
 import fr.utbm.TeachMe.services.CourseSessionService;
+import org.apache.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,6 +14,8 @@ import java.io.PrintWriter;
 import java.util.List;
 
 public class FilterByLocation extends HttpServlet {
+
+    private static final Logger logger = Logger.getLogger(FilterByLocation.class);
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
@@ -29,7 +32,7 @@ public class FilterByLocation extends HttpServlet {
         }
         else{
             out.println("<meta http-equiv=\"refresh\" content=\"3;url=http://localhost:8080/TeachMe/\"/><body>Error while retrieving corresponding Session</body>");
-            //TODO : Logger
+            logger.fatal("Error while retrieving corresponding Session");
         }
     }
 }

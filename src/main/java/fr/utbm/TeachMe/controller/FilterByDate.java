@@ -14,8 +14,12 @@ import  java.util.List;
 
 import fr.utbm.TeachMe.entity.CourseSession;
 import fr.utbm.TeachMe.services.CourseSessionService;
+import org.apache.log4j.Logger;
 
 public class FilterByDate extends HttpServlet {
+
+    private static final Logger logger = Logger.getLogger(FilterByDate.class);
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
@@ -28,7 +32,7 @@ public class FilterByDate extends HttpServlet {
             formatedDate = format.parse(selectedDate);
         }catch (ParseException pe){
             pe.printStackTrace();
-            //TODO: logger : error while parsing date
+            logger.fatal("error while parsing date", pe);
         }
         Date sqlDate = new Date(formatedDate.getTime());
         CourseSessionService css = new CourseSessionService();
@@ -41,7 +45,7 @@ public class FilterByDate extends HttpServlet {
         }
         else{
             out.println("<meta http-equiv=\"refresh\" content=\"3;url=http://localhost:8080/TeachMe/\"/><body>Error while retrieving corresponding Session</body>");
-            //TODO : Logger
+            logger.fatal("Error while retrieving corresponding Session");
         }
     }
 

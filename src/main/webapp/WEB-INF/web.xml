@@ -20,6 +20,10 @@
         <servlet-name>FilterByLocation</servlet-name>
         <servlet-class>fr.utbm.TeachMe.controller.FilterByLocation</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>FilterByTitle</servlet-name>
+        <servlet-class>fr.utbm.TeachMe.controller.FilterByTitle</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Apply</servlet-name>
         <url-pattern>/applyServlet</url-pattern>
@@ -35,6 +39,10 @@
     <servlet-mapping>
         <servlet-name>FilterByLocation</servlet-name>
         <url-pattern>/filterByLocation</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FilterByTitle</servlet-name>
+        <url-pattern>/filterByTitle</url-pattern>
     </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>

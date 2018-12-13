@@ -65,6 +65,10 @@
             </select>
             <input type="submit" value="Search by location">
             </form>
+            <form action = "filterByTitle">
+                <input name="titleString" type="text">
+                <input type="submit" value="Search by title">
+            </form>
                 <table >
                 <thead>
                     <tr>

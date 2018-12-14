@@ -86,7 +86,7 @@ public class Client {
 
         Client client = (Client) o;
 
-        if (id != client.id) return false;
+//        if (id != client.id) return false;
         if (lastname != null ? !lastname.equals(client.lastname) : client.lastname != null) return false;
         if (firstname != null ? !firstname.equals(client.firstname) : client.firstname != null) return false;
         if (address != null ? !address.equals(client.address) : client.address != null) return false;

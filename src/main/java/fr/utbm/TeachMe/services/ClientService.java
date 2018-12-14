@@ -9,7 +9,7 @@ import fr.utbm.TeachMe.repository.ClientDao;
 public class ClientService implements Serializable {
 
     // PROPERTIES
-    ClientDao clientDao = new ClientDao();
+    private ClientDao clientDao = new ClientDao();
 
     // CONSTRUCTORS
     public ClientService() {
@@ -24,6 +24,7 @@ public class ClientService implements Serializable {
     public List<Client> getAllClients() {
         return clientDao.getAllClients();
     }
+    public List<Client> getClientBySessionId(Integer sessionId) {return clientDao.getClientBySessionId(sessionId);}
 
     // SETTERS
     // FUNCTIONS AND METHODS

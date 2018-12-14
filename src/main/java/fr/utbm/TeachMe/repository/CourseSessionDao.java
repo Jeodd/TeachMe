@@ -1,5 +1,7 @@
 package fr.utbm.TeachMe.repository;
 
+import fr.utbm.TeachMe.entity.Client;
+import fr.utbm.TeachMe.services.ClientService;
 import fr.utbm.TeachMe.utils.HibernateUtils;
 import org.apache.log4j.Level;
 import org.hibernate.Session;
@@ -152,5 +154,12 @@ public class CourseSessionDao {
             logger.log(Level.INFO, "Session closed successfully");
         }
         return returnedList;
+    }
+
+    public Integer getPlaceAvailable(CourseSession session){
+        ClientService clientService = new ClientService();
+        List<Client> clientListForGivenSession = clientService.getClientBySessionId(session.getId());
+        Integer numberOfClient = clientListForGivenSession.size();
+        return session.getMax() - numberOfClient;
     }
 }

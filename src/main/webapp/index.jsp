@@ -9,7 +9,7 @@
 <html>
 <jsp:include page="fragments/header.html" />
 <%--//.size sur la liste de retour de la requete--%>
-<body id="page-top">
+<body id="page-top" class="sidebar-toggled">
 
 <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
@@ -34,12 +34,17 @@
             <%@ page import="fr.utbm.TeachMe.entity.CourseSession" %>
             <%@ page import="fr.utbm.TeachMe.entity.Location" %>
             <%@ page import="java.util.List" %>
+            <%@ page import="java.text.SimpleDateFormat"%>
+            <%@ page import="fr.utbm.TeachMe.entity.Course" %>
+            <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
             <%
                 List<CourseSession> listToDisplay = null;
                 List<Location> locationList = null;
                 LocationService ls = new LocationService();
                 CourseSessionService css = new CourseSessionService();
+                Integer t = 1010;
 
+                pageContext.setAttribute("t",t);
                 locationList = ls.getAllLocation();
 
                 if (request.getAttribute("data") != null){
@@ -48,7 +53,6 @@
                     listToDisplay = css.getAllCoursesSession();
                 }
             %>
-
             <div class="row">
                 <div class="col-md-4">
                     <form action = "filterByDate">
@@ -69,7 +73,7 @@
                                 <%
                                     for(int i = 0; i < locationList.size(); i++){
                                         %>
-                                        </br><%-- //TODO : without a tag (like br or p or whatever) before  option tag a city is missing (first one)--%>
+                                        </br>
                                         <option name="selectedLocation" value = "<%=locationList.get(i).getCity()%>"><%=locationList.get(i).getCity()%></option>
                                         <%
                                     }
@@ -104,24 +108,52 @@
                                 <th scope="col">Start Date</th>
                                 <th scope="col">End Date</th>
                                 <th scope="col">Maximum</th>
+                                <th scope="col">Remaining</th>
                                 <th scope="col">Apply</th>
                             </tr>
                         </thead>
                         <tbody>
                         <%
                             for(CourseSession item : listToDisplay) {
+                                Float maxPlace = item.getMax().floatValue();
+                                Float placeAvailable = css.getPlaceAvailable(item).floatValue();
+                                String progressBarClass = "";
+                                String button = "";
+                                SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+                                String startDate = format.format(item.getStartDate());
+                                String endDate = format.format(item.getEndDate());
+                                float percentageFull = placeAvailable / maxPlace *100;
+                                float progressBarPercentage = 100 - percentageFull;
+                                if(percentageFull >= 50){
+                                    progressBarClass = "class=\"progress-bar bg-success\"";
+                                }else if (percentageFull < 50 && percentageFull > 20 ){
+                                    progressBarClass = "class=\"progress-bar bg-warning\"";
+                                }else{
+                                    progressBarClass =  "class=\"progress-bar bg-danger\"";
+                                }
+                                if (placeAvailable == 0){
+                                    button = "<button style=\"margin-left: 15%;\" type=\"submit\" disabled class=\"btn btn-danger\"> Full </button>";
+                                }else{
+                                    button ="<button style=\"margin-left: 15%;\" type=\"submit\" class=\"btn btn-success\">Apply</button>";
+                                }
+
                                 %>
                                     <tr>
                                         <td><%=item.getId()%></td>
                                         <td><%=item.getCourse().getTitle()%></td>
                                         <td><%=item.getLocation().getCity()%></td>
-                                        <td><%=item.getStartDate().toString()%></td>
-                                        <td><%=item.getEndDate().toString()%></td>
-                                        <td><%=item.getMax().toString()%></td>
+                                        <td><%=startDate%></td>
+                                        <td><%=endDate%></td>
+                                        <td><%=maxPlace.toString()%></td>
+                                        <td>
+                                            <div class="progress">
+                                                <div <%=progressBarClass%> role="progressbar" style="width: <%=progressBarPercentage%>%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><%=placeAvailable.toString()%></div>
+                                            </div>
+                                        </td>
                                         <td>
                                             <form action = "applyServlet">
                                                 <input style="display: none" name="CourseSessionId" value="<%=item.getId()%>">
-                                                <button type="submit" class="btn btn-dark">Apply</button>
+                                                <%=button%>
                                             </form>
                                         </td>
                                     </tr>

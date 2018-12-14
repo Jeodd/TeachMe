@@ -5,8 +5,11 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import fr.utbm.TeachMe.utils.HibernateUtils;
+import org.hibernate.query.Query;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.List;
 
 public class ClientDao {
@@ -22,9 +25,14 @@ public class ClientDao {
             mySession.beginTransaction();
             mySession.save(c);
             mySession.getTransaction().commit();
+            HibernateUtils.logErrorDuringTransaction("save client", false);
 
+        }catch (Exception e ){
+            HibernateUtils.logErrorDuringTransaction("save client", true);
+            logger.log(Level.DEBUG,"Error during save client\n Stack trace :\n" + e.getMessage());
         }finally {
             mySession.close();
+            HibernateUtils.logSessionClose();
         }
     }
 
@@ -34,9 +42,15 @@ public class ClientDao {
             mySession.beginTransaction();
             mySession.delete(c);
             mySession.getTransaction().commit();
+            HibernateUtils.logErrorDuringTransaction("delete client", false);
 
-        }finally {
+        }catch (Exception e ){
+            HibernateUtils.logErrorDuringTransaction("delete client", true);
+            logger.log(Level.DEBUG,"Error during delete client\n Stack trace :\n" + e.getMessage());
+        }
+        finally {
             mySession.close();
+            HibernateUtils.logSessionClose();
         }
     }
 
@@ -46,9 +60,15 @@ public class ClientDao {
             mySession.beginTransaction();
             mySession.update(c);
             mySession.getTransaction().commit();
+            HibernateUtils.logErrorDuringTransaction("Update client", false);
 
-        }finally {
+        }catch (Exception e ){
+            HibernateUtils.logErrorDuringTransaction("Update client", true);
+            logger.log(Level.DEBUG,"Error during Update client\n Stack trace :\n" + e.getMessage());
+        }
+        finally {
             mySession.close();
+            HibernateUtils.logSessionClose();
         }
     }
 
@@ -64,7 +84,7 @@ public class ClientDao {
             logger.fatal("Error during clients recovery (all of them)", e);
         }finally {
             mySession.close();
-            logger.log(Level.INFO, "Session closed successfully");
+            HibernateUtils.logSessionClose();
         }
         return allClients;
     }
@@ -81,9 +101,30 @@ public class ClientDao {
             logger.fatal("Error during client recovery", e);
         }finally {
             mySession.close();
-            logger.log(Level.INFO, "Session closed successfully");
+            HibernateUtils.logSessionClose();
         }
         return selectedClient;
 
+    }
+
+    public List<Client> getClientBySessionId(Integer sessionId){
+        List<Client> retrievedClient = null;
+        Session mySession = HibernateUtils.openSession();
+        try{
+            mySession.beginTransaction();
+            String hqlStr ="FROM Client c WHERE c.courseSession.id = :_id";
+            Query q = mySession.createQuery(hqlStr);
+            q.setInteger("_id", sessionId);
+            retrievedClient = q.getResultList();
+            mySession.getTransaction().commit();
+            logger.log(Level.INFO, "Successfully retrieved client by sessionId  : "+ sessionId.toString());
+        }catch (Exception e){
+            logger.log(Level.WARN, "Error during getClientBySessionId()");
+            logger.log(Level.DEBUG,"Error during getClientBySessionId()\n Stack trace :\n" + e.getMessage());
+        }finally {
+            mySession.close();
+            HibernateUtils.logSessionClose();
+        }
+        return retrievedClient;
     }
 }

@@ -1,4 +1,5 @@
 package fr.utbm.TeachMe.utils;
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.hibernate.Session;
@@ -24,5 +25,16 @@ public class HibernateUtils {
 
     public static Session openSession() {
         return sessionFactory.openSession();
+    }
+    public static void logSessionClose(){
+        logger.log(Level.INFO, "Session closed successfully");
+    }
+    public static void logErrorDuringTransaction( String transactionName, Boolean isError){
+        if (isError){
+            logger.log(Level.ERROR, "Error during "+ transactionName);
+        }
+        else {
+            logger.log(Level.ERROR, " Successfully "+ transactionName);
+        }
     }
 }

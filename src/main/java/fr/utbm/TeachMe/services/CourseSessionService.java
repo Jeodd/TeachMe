@@ -48,4 +48,5 @@ public class CourseSessionService {
     public List<CourseSession> getCourseSessionByLocation (String cityName){
         return csdao.getCourseSessionByLocation(cityName);
     }
+    public Integer getPlaceAvailable(CourseSession session){return csdao.getPlaceAvailable(session);}
 }

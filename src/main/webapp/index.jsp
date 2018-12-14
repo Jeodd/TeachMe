@@ -121,7 +121,7 @@
                                         <td>
                                             <form action = "applyServlet">
                                                 <input style="display: none" name="CourseSessionId" value="<%=item.getId()%>">
-                                                <button type="submit" class="btn btn-success">Apply</button>
+                                                <button type="submit" class="btn btn-dark">Apply</button>
                                             </form>
                                         </td>
                                     </tr>

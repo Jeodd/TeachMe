@@ -32,16 +32,5 @@ public class CourseService {
         return cdao.getAllCourses();
     }
 
-    public List<Course> getallCoursesByCourseSessionDate(CourseSession cs) {
-        return cdao.getAllCoursesByCourseSessionDate(cs);
-    }
-
-    public List<Course> getAllCoursesByLocation(Location loc) {
-        return cdao.getAllCoursesByLocation(loc);
-    }
-
-    public List<Course> getAllCoursesByKeyWord(String keyWord) {
-        return cdao.getAllCoursesByKeyWord(keyWord);
-    }
 }
 

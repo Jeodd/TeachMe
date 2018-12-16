@@ -98,6 +98,13 @@
             <archiveClasses>true</archiveClasses>
             <webXml>src\main\webapp\WEB-INF\web.xml</webXml>
             <outputDirectory>out\artifacts\TeachMe\</outputDirectory>
+            <webResources>
+              <resource>
+                <directory>src\main\resources</directory>
+                <include>**/*.properties</include>
+                <targetPath>WEB-INF/classes</targetPath>
+              </resource>
+            </webResources>
           </configuration>
 
         </plugin>

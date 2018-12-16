@@ -25,10 +25,10 @@ public class ClientDao {
             mySession.beginTransaction();
             mySession.save(c);
             mySession.getTransaction().commit();
-            HibernateUtils.logErrorDuringTransaction("save client", false);
+            HibernateUtils.logErrorDuringTransaction("save client : "+c.toString(), false);
 
         }catch (Exception e ){
-            HibernateUtils.logErrorDuringTransaction("save client", true);
+            HibernateUtils.logErrorDuringTransaction("save client : "+c.toString(), true);
             logger.log(Level.DEBUG,"Error during save client\n Stack trace :\n" + e.getMessage());
         }finally {
             mySession.close();
@@ -96,7 +96,7 @@ public class ClientDao {
             mySession.beginTransaction();
             selectedClient = mySession.get(Client.class, c.getId());
             mySession.getTransaction().commit();
-            logger.log(Level.INFO, "Getting a client : OK");
+            logger.log(Level.INFO, "Getting  client "+selectedClient.toString()+" : OK");
         }catch (Exception e) {
             logger.fatal("Error during client recovery", e);
         }finally {

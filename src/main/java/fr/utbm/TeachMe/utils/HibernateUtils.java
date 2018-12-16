@@ -13,12 +13,9 @@ public class HibernateUtils {
 
     static {
         try {
-            PropertyConfigurator.configure("Log4J.properties");
-            PropertyConfigurator.configureAndWatch("Log4j.properties", 10000);
-
-            //Absolute paths for log4J activation
-            //PropertyConfigurator.configure("C:\\Users\\boxof\\IdeaProjects\\TeachMe\\src\\main\\resources\\Log4j.properties");
-            //PropertyConfigurator.configureAndWatch("C:\\Users\\boxof\\IdeaProjects\\TeachMe\\src\\main\\resources\\Log4j.properties", 10000);
+            PropertyConfigurator.configure("log4j.properties");
+            String basedire = System.getProperty("com.sun.aas.instanceRoot");
+            PropertyConfigurator.configureAndWatch(basedire+"/applications/TeachMe/WEB-INF/classes/log4j.properties", 10000);
             sessionFactory = new Configuration()
                     .configure()
                     .buildSessionFactory();

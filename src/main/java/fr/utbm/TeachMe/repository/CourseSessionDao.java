@@ -127,9 +127,9 @@ public class CourseSessionDao {
             q.setString("_cityName", cityName);
             returnedList = q.getResultList();
             mySession.getTransaction().commit();
-            logger.log(Level.INFO, "Getting all courses sessions : OK");
+            logger.log(Level.INFO, "getCourseSessionByLocation : OK");
         }catch (Exception e){
-            logger.fatal("Error during courses session recovery (all of them)", e);
+            logger.fatal("Error during courses session recovery (getCourseSessionByLocation)", e);
         } finally {
             mySession.close();
             logger.log(Level.INFO, "Session closed successfully");
@@ -146,9 +146,9 @@ public class CourseSessionDao {
             q.setString("_title", title);
             returnedList = q.getResultList();
             mySession.getTransaction().commit();
-            logger.log(Level.INFO, "Getting all courses sessions : OK");
+            logger.log(Level.INFO, "getCourseSessionByTitle : OK");
         }catch (Exception e){
-            logger.fatal("Error during courses session recovery (all of them)", e);
+            logger.fatal("Error during courses session recovery (getCourseSessionByTitle)", e);
         } finally {
             mySession.close();
             logger.log(Level.INFO, "Session closed successfully");

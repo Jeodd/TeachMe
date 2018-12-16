@@ -13,7 +13,12 @@ public class HibernateUtils {
 
     static {
         try {
-            PropertyConfigurator.configureAndWatch("Log4j2.properties", 10000);
+            PropertyConfigurator.configure("Log4J.properties");
+            PropertyConfigurator.configureAndWatch("Log4j.properties", 10000);
+
+            //Absolute paths for log4J activation
+            //PropertyConfigurator.configure("C:\\Users\\boxof\\IdeaProjects\\TeachMe\\src\\main\\resources\\Log4j.properties");
+            //PropertyConfigurator.configureAndWatch("C:\\Users\\boxof\\IdeaProjects\\TeachMe\\src\\main\\resources\\Log4j.properties", 10000);
             sessionFactory = new Configuration()
                     .configure()
                     .buildSessionFactory();

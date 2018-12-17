@@ -11,24 +11,31 @@
 <%--//.size sur la liste de retour de la requete--%>
 <body id="page-top" class="sidebar-toggled">
 
-<nav class="navbar navbar-expand navbar-dark bg-dark static-top">
-
-    <a class="navbar-brand mr-1" href="index.jsp">LO54 Project</a>
-
-    <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
-        <i class="fas fa-bars"></i>
-    </button>
-
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand mr-1" href="index.jsp">Maven Application - LO54 Project</a>
+    </div>
 </nav>
 
-<div id="wrapper">
+<header class="masthead" style="background-image: url('img/header.jpg');">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="page-heading">
+                    <h1 style="color: white;">Courses</h1>
+                    <span style="color: white;" class="subheading">Subscribe to a course</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
 
-    <jsp:include page="fragments/menu.html" />
+<div id="wrapper">
     <div id="content-wrapper">
 
         <div class="container-fluid">
 
-            <h2>Formation Catalogue :</h2>
             <%@ page import="fr.utbm.TeachMe.services.CourseSessionService" %>
             <%@ page import="fr.utbm.TeachMe.services.LocationService" %>
             <%@ page import="fr.utbm.TeachMe.entity.CourseSession" %>
@@ -169,8 +176,5 @@
     <div>
         <jsp:include page="fragments/footer.html" />
     </div>
-
-    <jsp:include page="fragments/js_include.html" />
-
 </body>
 </html>

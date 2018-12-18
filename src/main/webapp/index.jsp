@@ -9,6 +9,13 @@
 <html>
 <head>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 </head>
 <jsp:include page="fragments/header.html" />
 <%--//.size sur la liste de retour de la requete--%>
@@ -45,16 +52,11 @@
             <%@ page import="fr.utbm.TeachMe.entity.Location" %>
             <%@ page import="java.util.List" %>
             <%@ page import="java.text.SimpleDateFormat"%>
-            <%@ page import="fr.utbm.TeachMe.entity.Course" %>
-            <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
             <%
                 List<CourseSession> listToDisplay = null;
                 List<Location> locationList = null;
                 LocationService ls = new LocationService();
                 CourseSessionService css = new CourseSessionService();
-                Integer t = 1010;
-
-                pageContext.setAttribute("t",t);
                 locationList = ls.getAllLocation();
 
                 if (request.getAttribute("data") != null){
@@ -114,12 +116,12 @@
         </div>
         <div class="row">
             <div class="col-md-12 table-responsive">
-                <table class="table table-bordered table-striped">
+                <table id="courseSessionTable"class="table table-bordered table-striped">
                     <thead>
                     <tr>
                         <th scope="col">Number</th>
-                        <th scope="col">Location</th>
                         <th scope="col">Formation</th>
+                        <th scope="col">Location</th>
                         <th scope="col">Start Date</th>
                         <th scope="col">End Date</th>
                         <th scope="col">Maximum</th>
@@ -186,4 +188,13 @@
     <jsp:include page="fragments/footer.html" />
 </div>
 </body>
+<script type="text/javascript">
+    $('#courseSessionTable').DataTable({
+        "scrollY": "450px",
+        "scrollCollapse": true,
+        "searching": false,
+        "paging":   false,
+        "info":     false
+    });
+</script>
 </html>
